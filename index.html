@@ -9,65 +9,72 @@
 	<meta name="keywords" content="tutorial, three.js, hover effect, image distortion, webgl" />
 	<meta name="author" content="Niccolò Miranda and Clément Roche for Codrops" />
 	<link rel="shortcut icon" href="favicon.ico">
-	<link href="css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="css/common.css" rel="stylesheet" type="text/css" />
-	<link href="css/style1.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+	<link href="/dist/output.css" rel="stylesheet">
+	<link href="/main.css" rel="stylesheet">
 </head>
 
-<body class="body loading">
-	<main class="app">
-		<div class="frame">
-			<div class="frame__demos">
-				<a href="index.html" class="frame__demo frame__demo--current">Demo 1</a>
-				<a href="index2.html" class="frame__demo">Demo 2</a>
-				<a href="index3.html" class="frame__demo">Demo 3</a>
-			</div>
-			<div class="frame__wrap">
-				<div class="frame__credits">
-					<div class="credit-wrap">
-						<div class="frame__role">art direction / dev / photography</div>
-						<a aria-label="credit-1" rel="noopener" target="_blank" draggable="false" href="https://twitter.com/niccolomiranda" class="frame__link">Niccolò miranda</a>
-					</div>
-					<div class="credit-wrap">
-						<div class="frame__role">Development</div>
-						<a aria-label="credit-2" rel="noopener" target="_blank" draggable="false" href="https://twitter.com/clementroche_" class="frame__link">Clément roche</a>
-					</div>
+<body class="body loading bg-[#1d1d1d] text-white">
+	<div id="loading" class="bg-[#1d1d1d] flex justify-center items-center fixed top-0 left-0 w-full h-screen z-50">
+		<span class="loader">
+		  <span></span>
+		  <span></span>
+		</span>
+	  </div>
+	<main>
+		<select class="absolute top-0 right-0 border-2 text-black font-VT323 border-white rounded-none" id="selector" onchange="onESelect()">
+            <option value="rgb" selected>RGBShift</option>
+            <option value="trails">TrailsEffect</option>
+            <option value="stretch">StretchEffect</option>
+        </select>
+		<div id="rgb-view" class="w-full h-screen items-center justify-center hidden">
+			<div class="mhe-rgb grid grid-cols-1 gap-20 my-10 justify-center">
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">RGBShiftEffect</h1>
+					<img src="https://source.unsplash.com/random/480x720?sig=1"/>
 				</div>
-				<div class="frame__title-wrap">
-					<div class="frame__init"><em class="italic">presents</em></div>
-					<div class="frame__title">
-						<span class="span_1">How to Create Motion Hover Effects</span><br /><span class="span_2">with Image Distortions using Three.js</span>
-					</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">RGBShiftEffect</h1>
+					<img src="https://source.unsplash.com/random/480x420?sig=2"/>
 				</div>
-				<div class="frame__links">
-					<div class="frame__inner">
-						<a aria-label="frame-link" rel="noopener" target="_blank" draggable="false" href="https://tympanus.net/Tutorials/Interactive3DCharacter/" class="frame__link fl_1">Previous demo</a><a aria-label="frame-article" rel="noopener" target="_blank" draggable="false" href="https://tympanus.net/codrops/?p=44003" class="frame__link fl_1">Article</a>
-					</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">RGBShiftEffect</h1>
+					<img src="https://source.unsplash.com/random/720x480?sig=3"/>
 				</div>
 			</div>
 		</div>
-		<div class="grid">
-			<div class="grid-items">
-				<a aria-label="link-1" target="_blank" rel="noopener" draggable="false" class="link w-inline-block">
-					<h1 class="h1">montmartre</h1>
-					<div class="text">cemetery, paris</div>
-					<img class="content__img" src="img/demo1/img1.jpg" alt="img1" />
-				</a>
-				<div class="divider"></div>
-				<a aria-label="link-2" target="_blank" rel="noopener" draggable="false" class="link w-inline-block">
-					<h1 class="h1">bir-hakem</h1>
-					<div class="text">bridge, paris</div>
-					<img class="content__img" src="img/demo1/img2.jpg" alt="img2"/>
-				</a>
+		<div id="trails-view" class="w-full h-screen items-center justify-center hidden">
+			<div class="mhe-trails grid grid-cols-1 gap-20 my-10 justify-center">
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">TrailsEffect</h1>
+					<img src="https://source.unsplash.com/random/480x720?sig=4"/>
+				</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">TrailsEffect</h1>
+					<img src="https://source.unsplash.com/random/480x420?sig=5"/>
+				</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">TrailsEffect</h1>
+					<img src="https://source.unsplash.com/random/720x480?sig=6"/>
+				</div>
 			</div>
-			<div class="grid-items g2">
-				<div class="divider d2"></div>
-				<a aria-label="link-3" target="_blank" rel="noopener" draggable="false" class="link w-inline-block">
-					<h1 class="h1">république</h1>
-					<div class="text">people, paris</div>
-					<img class="content__img" src="img/demo1/img3.jpg" alt="img3" />
-				</a>
-				<div class="divider d3"></div>
+		</div>
+		<div id="stretch-view" class="w-full h-screen items-center justify-center hidden">
+			<div class="mhe-stretch grid grid-cols-1 gap-20 my-10 justify-center">
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">StretchEffect</h1>
+					<img src="https://source.unsplash.com/random/480x720?sig=7"/>
+				</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">StretchEffect</h1>
+					<img src="https://source.unsplash.com/random/480x420?sig=8"/>
+				</div>
+				<div class="link">
+					<h1 class="text-6xl font-VT323 tracking-widest uppercase">StretchEffect</h1>
+					<img src="https://source.unsplash.com/random/720x480?sig=9"/>
+				</div>
 			</div>
 		</div>
 	</main>
@@ -76,10 +83,12 @@
 	<script src="js/Math.js"></script>
 	<script src="js/EffectShell.js"></script>
 	<script src="js/RGBShiftEffect.js"></script>
+    <script src="js/TrailsEffect.js"></script>
+    <script src="js/StretchEffect.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script>
 	const container = document.body
-	const itemsWrapper = document.querySelector('.grid')
+	const itemsWrapper = document.querySelector('.mhe-rgb')
 
     // Preload images
     const preloadImages = () => {
@@ -94,6 +103,86 @@
         const effect = new RGBShiftEffect(container, itemsWrapper, { strength: 0.25 })
 	});
 	</script>
+	<script>
+		const container2 = document.body
+		const itemsWrapper2 = document.querySelector('.mhe-trails')
+		
+		// Preload images
+		const preloadImages2 = () => {
+			return new Promise((resolve, reject) => {
+				imagesLoaded(document.querySelectorAll('img'), resolve);
+			});
+		};
+		// And then..
+		preloadImages2().then(() => {
+			// Remove the loader
+			document.body.classList.remove('loading');
+			const effect = new TrailsEffect(container2, itemsWrapper2)
+		});
+	</script>
+	<script>
+		const container3 = document.body
+		const itemsWrapper3 = document.querySelector('.mhe-stretch')
+	
+		// Preload images
+		const preloadImages3 = () => {
+			return new Promise((resolve, reject) => {
+				imagesLoaded(document.querySelectorAll('img'), resolve);
+			});
+		};
+		// And then..
+		preloadImages3().then(() => {
+			// Remove the loader
+			document.body.classList.remove('loading');
+			const effect = new StretchEffect(container3, itemsWrapper3)
+		});
+		</script>
+		<script>
+			var rgb = document.getElementById("rgb-view");
+			var e = document.getElementById("selector");
+			var result = e.options[e.selectedIndex].value;	
+			if (result === 'rgb') {
+				rgb.classList.remove('hidden')
+				rgb.className += " flex";
+			}
+			function onESelect(){
+				var rgb = document.getElementById("rgb-view");
+				var trails = document.getElementById("trails-view");
+				var stretch = document.getElementById("stretch-view");
+
+				selectElement = document.querySelector('#selector');
+				output = selectElement.value;
+				if (output == 'rgb') {
+					rgb.classList.remove('hidden')
+					rgb.className += " flex";
+					trails.classList.remove('flex')
+					trails.className += " hidden";
+					stretch.classList.remove('flex')
+					stretch.className += " hidden";
+				} else if(output == 'trails'){
+					rgb.classList.remove('flex')
+					rgb.className += " hidden";
+					trails.classList.remove('hidden')
+					trails.className += " flex";
+					stretch.classList.remove('flex')
+					stretch.className += " hidden";
+				} else if(output == 'stretch'){
+					rgb.classList.remove('flex')
+					rgb.className += " hidden";
+					trails.classList.remove('flex')
+					trails.className += " hidden";
+					stretch.classList.remove('hidden')
+					stretch.className += " flex";
+				}
+			}
+		</script>
+		<script>
+			var loading = document.getElementById("loading");
+			function loadingTime() {
+				loading.className += " hidden";
+			}
+			setTimeout(loadingTime, 9000);
+		</script>
 </body>
 
 </html>
